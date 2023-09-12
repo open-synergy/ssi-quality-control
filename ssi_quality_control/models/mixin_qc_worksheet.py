@@ -14,6 +14,28 @@ class MixinQCWorksheet(models.AbstractModel):
     _qc_worksheet_create_page = False
     _qc_worksheet_page_xpath = "//page[last()]"
 
+    qc_result_computation_method = fields.Selection(
+        string="QC Result Computation Method",
+        selection=[
+            ("auto", "Automatic"),
+            ("manual", "Manual"),
+        ],
+        default="auto",
+        required=True,
+    )
+    qc_auto_result = fields.Boolean(
+        string="QC Automatic Result",
+        compute="_compute_qc_result",
+        store=True,
+    )
+    qc_manual_result = fields.Boolean(
+        string="QC Manual Result",
+    )
+    qc_final_result = fields.Boolean(
+        string="QC Final Result",
+        compute="_compute_qc_result",
+        store=True,
+    )
     qc_worksheet_ids = fields.One2many(
         string="QC Worksheets",
         comodel_name="qc_worksheet",
@@ -22,6 +44,33 @@ class MixinQCWorksheet(models.AbstractModel):
         auto_join=True,
         readonly=False,
     )
+
+    @api.depends(
+        "qc_result_computation_method",
+        "qc_manual_result",
+        "qc_worksheet_ids",
+        "qc_worksheet_ids.state",
+        "qc_worksheet_ids.result",
+    )
+    def _compute_qc_result(self):
+        for record in self:
+            automatic_result = final_result = False
+
+            for worksheet in record.qc_worksheet_ids.filtered(
+                lambda r: r.state == "done"
+            ):
+                if not worksheet.result:
+                    continue
+
+                automatic_result = True
+
+            if record.qc_result_computation_method == "auto":
+                final_result = automatic_result
+            else:
+                final_result = record.qc_manual_result
+
+            record.qc_auto_result = automatic_result
+            record.qc_final_result = final_result
 
     @api.model
     def fields_view_get(
@@ -55,3 +104,15 @@ class MixinQCWorksheet(models.AbstractModel):
         qc_worksheet_ids = self.mapped("qc_worksheet_ids")
         qc_worksheet_ids.unlink()
         return super(MixinQCWorksheet, self).unlink()
+
+    def action_open_qc_worksheet(self):
+        for record in self.sudo():
+            result = record._open_qc_worksheet()
+        return result
+
+    def _open_qc_worksheet(self):
+        self.ensure_one()
+
+        waction = self.env.ref("ssi_quality_control.qc_worksheet_action").read()[0]
+        waction.update({"domain": [("id", "in", self.qc_worksheet_ids.ids)]})
+        return waction

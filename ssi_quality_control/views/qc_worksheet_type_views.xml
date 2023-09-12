@@ -91,7 +91,7 @@
         parent="menu_quality_control_configuration"
         action="qc_worksheet_type_action"
         groups="qc_worksheet_type_group"
-        sequence="120"
+        sequence="130"
     />
 
 </odoo>
