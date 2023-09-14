@@ -29,6 +29,7 @@
                 <field name="object_reference" />
                 <field name="type_id" />
                 <field name="date" />
+                <field name="result" />
             </xpath>
         </data>
     </field>
@@ -50,6 +51,7 @@
             <xpath expr="//group[@name='header_right']" position="inside">
                 <field name="date" />
                 <field name="type_id" />
+                <field name="result" />
             </xpath>
             <xpath expr="//page[1]" position="before">
                 <page name="question" string="Questions">

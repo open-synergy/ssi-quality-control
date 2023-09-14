@@ -146,6 +146,11 @@ class QCWorksheet(models.Model):
         comodel_name="qc_worksheet.question",
         inverse_name="worksheet_id",
     )
+    result = fields.Boolean(
+        string="Result",
+        compute="_compute_result",
+        store=True,
+    )
     state = fields.Selection(
         string="State",
         selection=[
@@ -180,6 +185,19 @@ class QCWorksheet(models.Model):
         ]
         res += policy_field
         return res
+
+    @api.depends(
+        "question_ids",
+        "question_ids.success",
+    )
+    def _compute_result(self):
+        for record in self:
+            result = True
+            for question in record.question_ids:
+                if not question.success:
+                    result = False
+                    continue
+            record.result = result
 
     def action_reload_question(self):
         for record in self.sudo():
