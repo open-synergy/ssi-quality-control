@@ -54,15 +54,14 @@ class MixinQCWorksheet(models.AbstractModel):
     )
     def _compute_qc_result(self):
         for record in self:
-            automatic_result = final_result = False
+            automatic_result = final_result = True
 
             for worksheet in record.qc_worksheet_ids.filtered(
                 lambda r: r.state == "done"
             ):
                 if not worksheet.result:
+                    automatic_result = False
                     continue
-
-                automatic_result = True
 
             if record.qc_result_computation_method == "auto":
                 final_result = automatic_result
