@@ -56,9 +56,11 @@ class MixinQCWorksheet(models.AbstractModel):
         for record in self:
             automatic_result = final_result = True
 
-            for worksheet in record.qc_worksheet_ids.filtered(
-                lambda r: r.state == "done"
-            ):
+            for worksheet in record.qc_worksheet_ids:
+                if worksheet.state != "done":
+                    automatic_result = False
+                    continue
+
                 if not worksheet.result:
                     automatic_result = False
                     continue
