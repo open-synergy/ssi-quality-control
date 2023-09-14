@@ -18,7 +18,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[ssi_quality_control](ssi_quality_control/) | 14.0.1.1.0 |  | Quality COntrol
+[ssi_quality_control](ssi_quality_control/) | 14.0.1.2.0 |  | Quality COntrol
 
 [//]: # (end addons)
 
