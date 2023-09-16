@@ -1,6 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_qc_worksheet_type_configurator,qc_worksheet_type - configurator,model_qc_worksheet_type,qc_worksheet_type_group,1,1,1,1
 access_qc_worksheet_type_all,qc_worksheet_type - all user,model_qc_worksheet_type,,1,0,0,0
+access_qc_worksheet_set_configurator,qc_worksheet_set - configurator,model_qc_worksheet_set,qc_worksheet_set_group,1,1,1,1
+access_qc_worksheet_set_all,qc_worksheet_set - all user,model_qc_worksheet_set,,1,0,0,0
+access_qc_worksheet_set_worksheet_type_configurator,qc_worksheet_set_worksheet_type - configurator,model_qc_worksheet_set_worksheet_type,qc_worksheet_set_group,1,1,1,1
+access_qc_worksheet_set_worksheet_type_all,qc_worksheet_set_worksheet_type - all user,model_qc_worksheet_set_worksheet_type,,1,0,0,0
 access_qc_value_item_configurator,qc_value_item - configurator,model_qc_value_item,qc_value_item_group,1,1,1,1
 access_qc_value_item_all,qc_value_item - all user,model_qc_value_item,,1,0,0,0
 access_qc_value_set_configurator,qc_value_set - configurator,model_qc_value_set,qc_value_set_group,1,1,1,1

@@ -17,6 +17,18 @@
         />
 </record>
 
+<record id="qc_worksheet_set_group" model="res.groups">
+    <field name="name">QC Worksheet Set</field>
+    <field
+            name="category_id"
+            ref="ssi_quality_control.quality_control_configurator_module_category"
+        />
+    <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+</record>
+
 <record id="qc_value_set_group" model="res.groups">
     <field name="name">QC Value Set</field>
     <field

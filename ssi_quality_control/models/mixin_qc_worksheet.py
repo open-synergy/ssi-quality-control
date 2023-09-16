@@ -36,6 +36,10 @@ class MixinQCWorksheet(models.AbstractModel):
         compute="_compute_qc_result",
         store=True,
     )
+    qc_worksheet_set_id = fields.Many2one(
+        string="Worksheet Set",
+        comodel_name="qc_worksheet_set",
+    )
     qc_worksheet_ids = fields.One2many(
         string="QC Worksheets",
         comodel_name="qc_worksheet",
@@ -111,9 +115,28 @@ class MixinQCWorksheet(models.AbstractModel):
             result = record._open_qc_worksheet()
         return result
 
+    def action_create_qc_worksheet(self):
+        for record in self.sudo():
+            record._create_qc_worksheet()
+
     def _open_qc_worksheet(self):
         self.ensure_one()
 
         waction = self.env.ref("ssi_quality_control.qc_worksheet_action").read()[0]
         waction.update({"domain": [("id", "in", self.qc_worksheet_ids.ids)]})
         return waction
+
+    def _create_qc_worksheet(self):
+        self.ensure_one()
+
+        if not self.qc_worksheet_set_id:
+            return True
+
+        if self.qc_worksheet_ids:
+            return True
+
+        for worksheet_type in self.qc_worksheet_set_id.type_ids:
+            worksheet_type._create_worksheet(self)
+
+        if self.qc_worksheet_ids:
+            self.qc_worksheet_ids.action_reload_question()

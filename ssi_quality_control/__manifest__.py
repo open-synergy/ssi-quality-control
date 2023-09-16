@@ -36,6 +36,7 @@
         "views/qc_value_item_views.xml",
         "views/qc_value_set_views.xml",
         "views/qc_worksheet_type_views.xml",
+        "views/qc_worksheet_set_views.xml",
         "views/qc_worksheet_views.xml",
     ],
     "demo": [],

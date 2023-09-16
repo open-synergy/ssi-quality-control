@@ -11,6 +11,8 @@ from . import (
     qc_worksheet_type,
     qc_worksheet_type_question,
     qc_worksheet_type_question_value,
+    qc_worksheet_set,
+    qc_worksheet_set_worksheet_type,
     qc_worksheet,
     qc_worksheet_question,
     mixin_qc_worksheet,

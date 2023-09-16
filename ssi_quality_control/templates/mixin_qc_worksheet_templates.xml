@@ -7,6 +7,7 @@
     <page name="page_qc_worksheet" string="Quality Control">
         <group name="qc_1" colspan="4" col="2">
             <group name="qc_1_1" colspan="1" col="2">
+                <field name="qc_worksheet_set_id" />
                 <field
                         name="qc_result_computation_method"
                         string="Result Computation Method"
@@ -19,12 +20,22 @@
             </group>
         </group>
         <button
+                name="action_create_qc_worksheet"
+                type="object"
+                string="Create Worksheet From Set"
+                class="oe_highlight"
+                icon="fa-gears"
+                style="margin-right:4px"
+            />
+        <button
                 name="action_open_qc_worksheet"
                 type="object"
                 string="Open QC Worksheet"
                 class="oe_highlight"
                 icon="fa-list"
             />
+
+
         <field
                 name="qc_worksheet_ids"
                 nolabel="1"
