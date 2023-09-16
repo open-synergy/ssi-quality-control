@@ -57,7 +57,7 @@
                 <page name="question" string="Questions">
                     <button
                             name="action_reload_question"
-                            string="Reloan Question"
+                            string="Reload Question"
                             type="object"
                             attrs="{'invisible': [('state','!=','draft')]}"
                             class="oe_highlight"

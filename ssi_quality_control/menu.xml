@@ -30,6 +30,20 @@
         sequence="999"
     />
 
+<menuitem
+        id="menu_quality_control_configuration_value"
+        name="Value"
+        parent="menu_quality_control_configuration"
+        sequence="110"
+    />
+
+<menuitem
+        id="menu_quality_control_configuration_worksheet"
+        name="Worksheet"
+        parent="menu_quality_control_configuration"
+        sequence="120"
+    />
+
 
 
 </odoo>

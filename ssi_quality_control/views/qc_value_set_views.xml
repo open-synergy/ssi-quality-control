@@ -57,8 +57,8 @@
 
 <menuitem
         id="qc_value_set_menu"
-        name="Value Sets"
-        parent="menu_quality_control_configuration"
+        name="Sets"
+        parent="menu_quality_control_configuration_value"
         action="qc_value_set_action"
         groups="qc_value_set_group"
         sequence="120"

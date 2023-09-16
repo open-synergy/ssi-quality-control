@@ -46,8 +46,8 @@
 
 <menuitem
         id="qc_value_item_menu"
-        name="Value Items"
-        parent="menu_quality_control_configuration"
+        name="Items"
+        parent="menu_quality_control_configuration_value"
         action="qc_value_item_action"
         groups="qc_value_item_group"
         sequence="110"

@@ -87,11 +87,11 @@
 
 <menuitem
         id="qc_worksheet_type_menu"
-        name="Worksheet Types"
-        parent="menu_quality_control_configuration"
+        name="Types"
+        parent="menu_quality_control_configuration_worksheet"
         action="qc_worksheet_type_action"
         groups="qc_worksheet_type_group"
-        sequence="130"
+        sequence="110"
     />
 
 </odoo>
