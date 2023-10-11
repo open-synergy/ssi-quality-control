@@ -2,9 +2,10 @@
 # Copyright 2022 PT. Simetri Sinergi Indonesia
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from lxml import etree
 
 from odoo import api, fields, models
+
+from odoo.addons.ssi_decorator import ssi_decorator
 
 
 class MixinQCWorksheet(models.AbstractModel):
@@ -77,33 +78,16 @@ class MixinQCWorksheet(models.AbstractModel):
             record.qc_auto_result = automatic_result
             record.qc_final_result = final_result
 
-    @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        res = super().fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
-        )
-        if view_type == "form" and self._work_log_create_page:
-            doc = etree.XML(res["arch"])
-            node_xpath = doc.xpath(self._work_log_page_xpath)
-            if node_xpath:
-                str_element = self.env["ir.qweb"]._render(
-                    "ssi_quality_control.qc_worksheet_page"
-                )
-                for node in node_xpath:
-                    new_node = etree.fromstring(str_element)
-                    node.addnext(new_node)
-
-            View = self.env["ir.ui.view"]
-
-            if view_id and res.get("base_model", self._name) != self._name:
-                View = View.with_context(base_model_name=res["base_model"])
-            new_arch, new_fields = View.postprocess_and_fields(doc, self._name)
-            res["arch"] = new_arch
-            new_fields.update(res["fields"])
-            res["fields"] = new_fields
-        return res
+    @ssi_decorator.insert_on_form_view()
+    def _qc_worksheet_insert_form_element(self, view_arch):
+        if self._qc_worksheet_create_page:
+            view_arch = self._add_view_element(
+                view_arch=view_arch,
+                qweb_template_xml_id="ssi_quality_control.qc_worksheet_page",
+                xpath=self._qc_worksheet_page_xpath,
+                position="after",
+            )
+        return view_arch
 
     def unlink(self):
         qc_worksheet_ids = self.mapped("qc_worksheet_ids")
