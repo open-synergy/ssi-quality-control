@@ -61,7 +61,7 @@ class QCWorksheetQuestion(models.Model):
     )
     uom_id = fields.Many2one(
         string="UoM",
-        comodel_name="product.uom",
+        comodel_name="uom.uom",
         readonly=True,
     )
     valid_values = fields.Char(
