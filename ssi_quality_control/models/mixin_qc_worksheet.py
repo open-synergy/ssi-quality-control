@@ -10,6 +10,9 @@ from odoo.addons.ssi_decorator import ssi_decorator
 
 class MixinQCWorksheet(models.AbstractModel):
     _name = "mixin.qc_worksheet"
+    _inherit = [
+        "mixin.decorator",
+    ]
     _description = "QC Worksheet Mixin"
 
     _qc_worksheet_create_page = False
