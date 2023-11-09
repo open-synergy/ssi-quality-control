@@ -19,6 +19,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [ssi_quality_control](ssi_quality_control/) | 14.0.2.0.0 |  | Quality COntrol
+[ssi_quality_control_related_attachment](ssi_quality_control_related_attachment/) | 14.0.1.0.0 |  | Quality Control Worksheet - Related Attachment Integration
 [ssi_quality_control_work_log](ssi_quality_control_work_log/) | 14.0.1.0.0 |  | Quality Control + Work Log Integration
 
 [//]: # (end addons)
