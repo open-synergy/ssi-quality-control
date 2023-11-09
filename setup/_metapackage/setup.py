@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-ssi_quality_control',
+        'odoo14-addon-ssi_quality_control_reference_document',
         'odoo14-addon-ssi_quality_control_related_attachment',
         'odoo14-addon-ssi_quality_control_work_log',
     ],
